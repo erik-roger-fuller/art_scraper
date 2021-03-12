@@ -11,7 +11,6 @@ class FriezeSpider(SitemapSpider):
                     'https://www.frieze.com/sitemap.xml?page=3',
                     'https://www.frieze.com/sitemap.xml?page=4',
                     'https://www.frieze.com/sitemap.xml?page=5',
-
                     'https://www.frieze.com/sitemap.xml?page=6',
                     'https://www.frieze.com/sitemap.xml?page=7',
                     'https://www.frieze.com/sitemap.xml?page=8']
@@ -47,20 +46,9 @@ class FriezeSpider(SitemapSpider):
         except IndexError:
             pass
 
-
-
         l.add_xpath('tag', '//a[contains(@href,"tags")]/descendant-or-self::text()')
 
         l.add_value('source', 'Frieze')
 
         yield l.load_item()
 
-"""
-'https://www.frieze.com/sitemap.xml?page=9',
-'https://www.frieze.com/sitemap.xml?page=10',
-
-'https://www.frieze.com/sitemap.xml?page=11',
-'https://www.frieze.com/sitemap.xml?page=12',
-'https://www.frieze.com/sitemap.xml?page=13',
-'https://www.frieze.com/sitemap.xml?page=14'
-"""

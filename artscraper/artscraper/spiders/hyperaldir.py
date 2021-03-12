@@ -27,8 +27,6 @@ class HyperaldirSpider(SitemapSpider):
                     'https://hyperallergic.com/wp-sitemap-posts-post-14.xml/',
                     'https://hyperallergic.com/wp-sitemap-posts-post-15.xml/' ]
 
-
-
     def parse(self, response):
         item = Hyperallergic_Dir_Item
 
@@ -61,34 +59,5 @@ class HyperaldirSpider(SitemapSpider):
         l.add_value('source', 'Hyperallergic')
 
         yield l.load_item()
-#'article p:not([class*="wp-caption-text"]):not(nav):not(#comments):not(#text-34):not(#text-33)::text, article h2:not(nav):not(#comments):not(#text-34):not(#text-33)::text, article em:not(nav):not(#comments):not(#text-34):not(#text-33)::text, article strong:not(nav):not(#comments):not(#text-34):not(#text-33)::text, article p:not(nav):not(#comments):not(#text-34):not(#text-33) a::text')
-#/html/body/div[1]/div[2]/section/main/div/article/div[1]/p
-#/html/body/div[1]/div[2]/section/main/div/article/div[1]/div[1]/amp-img/img
-#/html/body/div[1]/div[2]/section/main/div/article/footer/span/a[1]
-
-"""
-        #item = Hyperallergic_Dir
-        article_links = response.css('td.loc a')
-        print(article_links)
-        #l = ItemLoader(item=Hyperallergic_Dir(), selector=article_links)
-
-        #for link in article_links:
-            #l.add_css("link", "a::attr(href)")
-            #print(link)
-
-            #yield l.load_item()
-
-    ##baseurl = 'https://hyperallergic.com/wp-sitemap-posts-post-'
-    for allurl in range(1, 4):  # 15]:
-        finurl = baseurl + str(allurl) + '.xml'
-        sitemap_urls.append(finurl)
-
-
-    def start_requests(self):
-
-        for url in sitemap_urls:
-            yield scrapy.Request(url=url, callback=self.parse)
-            time.sleep(1)
-"""
 
 

@@ -8,7 +8,7 @@ import json
 
 class ArtforumSpider(SitemapSpider):
     name = 'artforum'
-
+    #comment oout and move square brackets to select specific eras
     sitemap_urls = ['https://www.artforum.com/sitemap/articles?page=70',
                     'https://www.artforum.com/sitemap/articles?page=69',
                     'https://www.artforum.com/sitemap/articles?page=68',
@@ -127,81 +127,9 @@ class ArtforumSpider(SitemapSpider):
         pubtime = json_head['datePublished']
         l.add_value('pubtime', pubtime)
 
-        #l.add_xpath('print_pubtime', "/html/body/div[2]/div[4]/div/div/div/div/div[1]/div/a/img") #
-
         l.add_xpath('tag', '//h3[@class="slug--margin-top"]/a/text()'
                            '|//h1[@class="slug"]/a/text()')
 
         l.add_value('source', 'Artforum')
 
         yield l.load_item()
-
-"""
-                 
-         
-         
-          l.add_xpath('title', '//div/h1/descendant-or-self::text()')
-
-        l.add_xpath('para', '//section/p/descendant-or-self::text()'
-                            '|//section/blockquote/p/descendant-or-self::text()'
-                            '|//section//ul/li/descendant-or-self::text()'
-                            '|//section//ol/li/descendant-or-self::text()'
-                            '|//section/h2/descendant-or-self::text()')
-
-        l.add_xpath('captions', '//section/p/div/div/ul/li/img/@alt|//figcaption') #
-
-        l.add_xpath('images', '//article/section/div/div/a/img/@src') #
-
-        author = json_head['author']
-        l.add_value('author', author )
-
-        l.add_xpath('pubtime', "/html/body/div[2]/div[4]/div/div/div/article/div/div/span[1]")#
-
-        l.add_xpath('print_pubtime', "/html/body/div[2]/div[4]/div/div/div/div/div[1]/div/a/img") #
-
-        l.add_xpath('tag', '/html/body/div[2]/div[4]/div/div/div/article/h3/a::text()')
-
-        l.add_value('url', '//div/h1/descendant-or-self/@href' )
-
-        l.add_value('source', 'Artforum')
-
-          
-          
-           def start_requests(self):
-               #mapurls = ['https://www.artforum.com/sitemap/articles?page=66/'] #eventually iterate over list of nos
-               mapurl = 'https://www.artforum.com/sitemap/articles?page=66/'
-       
-               urls = []
-       
-               yield scrapy.Request(url=mapurl, callback=self.parse)
-       
-               scrapy.
-       
-               media_list = response.xpath('/urlset/url/loc')
-       
-               for pageurl in media_list:
-                   print(pageurl)
-                   urls.append()
-               #for when you append urls
-       
-       
-               for url in urls:
-                   yield scrapy.Request(url=url, callback=self.parse)
-       
-       
-           parse was here
-       
-       
-       
-               l.add_xpath('title', '/html/body/div[1]/div[2]/section/main/header/'
-                                    'child::h1//descendant-or-self::text()')
-       
-               l.add_xpath('para', '/html/body/div[1]/div[2]/section/main/div/article/'
-                                   'div[1]/child::p/descendant-or-self::text()'
-                                   '|//article/div[1]/blockquote/p/descendant-or-self::text()'
-                                   '|//article/div[1]/ul/li/descendant-or-self::text()'
-                                   '|//article/div[1]/ol/li/descendant-or-self::text()'
-                                   '|')
-       
-
-       """

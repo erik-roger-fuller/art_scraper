@@ -86,7 +86,7 @@ def filename_clean(filename):
     newname = newname.replace('*', '')
     newname = newname.replace('?', '')
 
-    #bananas
+    #things that look like bananas
     newname = newname.replace("(", "")
     newname = newname.replace(")", "")
     newname = newname.replace("[", "")
@@ -94,7 +94,7 @@ def filename_clean(filename):
     newname = newname.replace("{", "")
     newname = newname.replace("}", "")
 
-    #whiskers
+    #things that look like whiskers
     newname = newname.replace("'", "")
     newname = newname.replace('"', "")
 
@@ -105,6 +105,9 @@ def filename_clean(filename):
 
 
 """
+#other components of reconfiguarble pipelines
+
+
     def process_item(self, item, spider):
         #self.exporter.export_item(item)
         print("Pipeline test:  " + item['para'])
