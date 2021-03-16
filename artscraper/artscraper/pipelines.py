@@ -50,7 +50,7 @@ class Article_Pipeline:
             filename = filename_clean(filename)
             filename_final = str(filename + '.json')
             filepath = os.path.join(os.path.expanduser('~'),
-                                    'Desktop/scrapy/artscraper/articles_dump', filename)
+                                    'Desktop/scrapy/articles_dump', filename)
 
             print("Saved:   " + filename)
             self.close_exporters() #shutsdowns old
