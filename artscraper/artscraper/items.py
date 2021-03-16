@@ -6,7 +6,7 @@
 import scrapy
 from scrapy.item import Item, Field
 from scrapy.loader import ItemLoader
-from itemloaders.processors import TakeFirst, MapCompose, Join
+from itemloaders.processors import TakeFirst, MapCompose, Join, Compose
 from w3lib.html import remove_tags
 import re
 
@@ -20,6 +20,9 @@ def tags_and_unicode(xxx):
     zzz = aaa.strip()
     aaa = zzz.replace( "© FRIEZE 2020" , "")
     return aaa
+
+def elim_dupes(x):
+  return list(dict.fromkeys(x))
 
 
 class Artnet_Article_Item(scrapy.Item):
@@ -71,7 +74,7 @@ class Artforum_Dir_Item(scrapy.Item):
 class Nytimes_Dir_Item(scrapy.Item):
     title = Field(input_processor=Join(), output_processor=MapCompose(tags_and_unicode))
     para = Field(input_processor=Join(), output_processor=MapCompose(tags_and_unicode))
-    captions = Field(input_processor=MapCompose(tags_and_unicode))
+    captions = Field(input_processor=Compose(elim_dupes), output_processor=MapCompose(tags_and_unicode))
     images = Field()
     author = Field(input_processor=Join(), output_processor=TakeFirst())
     pubtime = Field(output_processor=TakeFirst())

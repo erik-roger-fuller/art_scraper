@@ -28,6 +28,7 @@ class NytimesSpider(scrapy.Spider):
                 links = link_dump.split(",")
                 # print(links)
                 for link in links:
+                    link = link.replace(" ", "")
                     # print(link)
                     urls.append(link)
 
@@ -35,7 +36,7 @@ class NytimesSpider(scrapy.Spider):
         #print(urls)
         print(len(urls))
 
-        for url in urls[102:105]:
+        for url in urls: #[111102:111115]:
             yield scrapy.Request(url=url, callback=self.parse)
 
 
@@ -47,7 +48,7 @@ class NytimesSpider(scrapy.Spider):
         l.add_xpath('title', '//meta[@property="og:title"]/@content')
 
         l.add_xpath('para', '//section[@name="articleBody"]/*/*/p/text()|'
-                            '//section[@name="articleBody"]/*/*/*/a/text()'
+                            '//section[@name="articleBody"]/*/*/*/a/text()|'
                             '//blockquote/*/text()') #set
 
         l.add_xpath('captions', "//figcaption/*/text()|"
@@ -62,8 +63,7 @@ class NytimesSpider(scrapy.Spider):
 
         l.add_xpath('pubtime', '//time/@datetime')
 
-        l.add_xpath('tag', '//h3[@class="slug--margin-top"]/a/text()'
-                           '|//h1[@class="slug"]/a/text()')
+        l.add_xpath('tag', '//meta[@property="article:tag"]/@content')
 
         l.add_value('source', 'Nytimes_Arts')
 
