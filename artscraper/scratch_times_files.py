@@ -17,12 +17,16 @@ with open(filepath2, newline='') as csvfile:
         link_dump = link_dump.replace("[","").replace("]","").replace("'","")
         #print(link_dump)
         #link_dump = (', '.join(row))
-        links = link_dump.split(",")
+        links = link_dump.split(", ")
         #print(links)
         for link in links:
-            #print(link)
-            urls.append(link)
-urls.reverse()
-print(urls)
-print(len(urls))
+            link = link.replace(" ", "")
+            if link == "":
+                pass
+            else:
+                # print(link)
+                urls.append(link)
+#urls.reverse()
+print(urls[333:400])
+#print(len(urls))
 

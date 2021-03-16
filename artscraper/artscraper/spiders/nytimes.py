@@ -25,18 +25,21 @@ class NytimesSpider(scrapy.Spider):
                 link_dump = link_dump.replace("[", "").replace("]", "").replace("'", "")
                 # print(link_dump)
                 # link_dump = (', '.join(row))
-                links = link_dump.split(",")
+                links = link_dump.split(", ")
                 # print(links)
                 for link in links:
                     link = link.replace(" ", "")
-                    # print(link)
-                    urls.append(link)
+                    if link == "":
+                        pass
+                    else:
+                        # print(link)
+                        urls.append(link)
 
         #urls.reverse()
         #print(urls)
         print(len(urls))
 
-        for url in urls: #[111102:111115]:
+        for url in urls[333:340]: #[111102:111115]:
             yield scrapy.Request(url=url, callback=self.parse)
 
 
