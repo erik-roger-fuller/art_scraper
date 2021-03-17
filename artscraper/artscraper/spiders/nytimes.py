@@ -38,9 +38,19 @@ class NytimesSpider(scrapy.Spider):
         #urls.reverse()
         #print(urls)
         print(len(urls))
+        badurls =[]
 
-        for url in urls[333:340]: #[111102:111115]:
-            yield scrapy.Request(url=url, callback=self.parse)
+        for url in urls[333:400]: #[111102:111115]:
+            try:
+                yield scrapy.Request(url=url, callback=self.parse)
+            except ValueError:
+                badurls.append(url)
+                print("HERE!!!!!" + url)
+                pass
+            except KeyboardInterrupt:
+                print(badurls)
+            print("END:     ")
+            print(badurls)
 
 
     def parse(self, response):
