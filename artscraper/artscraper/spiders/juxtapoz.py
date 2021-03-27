@@ -2,27 +2,56 @@ import scrapy
 from scrapy.spiders import SitemapSpider
 from artscraper.items import Juxtapoz_Item
 from scrapy.loader import ItemLoader
+from bs4 import BeautifulSoup
+import os
 
-
-class Juxtapoz_Spider(SitemapSpider):
+class Juxtapoz_Spider(scrapy.Spider):
     name = 'juxtapoz'
     #allowed_domains = ['https://www.juxtapoz.com/']
-    map = 'https://www.juxtapoz.com/index.php?option=com_jmap&view=sitemap&format=xml'
+    #map = 'https://www.juxtapoz.com/index.php?option=com_jmap&view=sitemap&format=xml'
     sitemap_urls = []
 
+    def start_requests(self):
+        filename1 = 'juxtapoz_sitemap.xml'
+        filepath1 = os.path.join(os.path.expanduser('~'), 'Desktop/Datasets/art/art_writing/juxtapoz', filename1)
+
+        urls = []
+        with open(filepath1, 'r') as read_path:
+            soup = BeautifulSoup(read_path, 'lxml')
+            linx = soup.select('loc')
+            for link in linx:
+                link = link.get_text()
+                #print(link)
+                urls.append(link)
+        urls = urls[:-22]
+
+        print(len(urls))
+        badurls =[]
+
+        for url in urls[222:233]: #[111102:111115]:
+            try:
+                yield scrapy.Request(url=url, callback=self.parse)
+            except ValueError:
+                badurls.append(url)
+                print("HERE!!!!!" + url)
+                pass
+            except KeyboardInterrupt:
+                print(badurls)
+            print("END:     ")
+            print(badurls)
+
+
     def parse(self, response):
-        item = Frieze_Item
+        item = Juxtapoz_Item
         l = ItemLoader(item=Juxtapoz_Item(), response=response)
 
-        """no modifi3ed tabs yet"""
+        l.add_xpath('title', '//meta[@name="title"]/@content') ###
 
-        l.add_xpath('title', '//meta[@property="og:title"]/@content')
+        l.add_xpath('para', '//div[@class="articleBody"]/*/text()'
+                            '|//p/*/text()') ###'|//span[@class="body-text"]/div/p/text()')
 
-        l.add_xpath('para', '//span[@class="body-text"]/*/text()'
-                            '|//p/*/text()'
-                            '|//span[@class="body-text"]/div/p/text()')
-
-        l.add_xpath('images', '//figure/img/@src')
+        l.add_xpath('images', '//div/img/@src'
+                              '|//p/img/@src') ###
 
         l.add_xpath('captions', '//figcaption/text()')
 

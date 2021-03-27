@@ -110,4 +110,5 @@ scrapy crawl artnetarticles
 scrapy crawl hyperaldir
 scrapy crawl artforum
 scrapy crawl frieze
+scrapy crawl juxtapoz
 """

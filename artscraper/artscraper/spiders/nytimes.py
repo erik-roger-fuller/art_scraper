@@ -1,9 +1,7 @@
 import scrapy
 from artscraper.items import Nytimes_Dir_Item
 from scrapy.loader import ItemLoader
-import time
 import os
-from scrapy.spiders import SitemapSpider
 import csv
 
 
