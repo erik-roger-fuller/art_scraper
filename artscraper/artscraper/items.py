@@ -94,6 +94,16 @@ class Frieze_Item(scrapy.Item):
     url = Field()
     source = Field(output_processor=TakeFirst())
 
+class Juxtapoz_Item(scrapy.Item):
+    title = Field(input_processor=Join(), output_processor=MapCompose(tags_and_unicode))
+    para = Field(input_processor=Join(), output_processor=MapCompose(tags_and_unicode))
+    captions = Field(input_processor=MapCompose(tags_and_unicode))
+    images = Field()
+    author = Field(input_processor=Join(), output_processor=TakeFirst())
+    pubtime = Field(output_processor=TakeFirst())
+    tag = Field()
+    url = Field()
+    source = Field(output_processor=TakeFirst())
 
 """   
 scrapy crawl artnetarticles
