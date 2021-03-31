@@ -4,7 +4,6 @@ from scrapy.loader import ItemLoader
 import os
 import csv
 
-
 class NytimesSpider(scrapy.Spider):
     name = 'nytimes'
     #allowed_domains = ['https://www.nytimes.com/sitemap/']

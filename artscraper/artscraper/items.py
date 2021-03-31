@@ -82,7 +82,6 @@ class Nytimes_Dir_Item(scrapy.Item):
     url = Field()
     source = Field(output_processor=TakeFirst())
 
-
 class Frieze_Item(scrapy.Item):
     title = Field(input_processor=Join(), output_processor=MapCompose(tags_and_unicode))
     para = Field(input_processor=Join(), output_processor=MapCompose(tags_and_unicode))
