@@ -97,7 +97,6 @@ def filename_clean(filename):
     #things that look like whiskers
     newname = newname.replace("'", "")
     newname = newname.replace('"', "")
-
     newname = newname.replace(".", "_")
     newname = newname.replace(",", "_")
     newfilename = newname.replace("+", "_")
