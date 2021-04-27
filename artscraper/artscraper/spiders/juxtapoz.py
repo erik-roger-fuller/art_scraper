@@ -12,11 +12,11 @@ class Juxtapoz_Spider(scrapy.Spider):
 
     def start_requests(self):
         filename1 = 'juxtapoz_sitemap.xml'
-        filepath1 = os.path.join(os.path.expanduser('~'), 'Desktop/Datasets/art/art_writing/juxtapoz', filename1)
+        #filepath1 = os.path.join(os.path.expanduser('~'), 'Desktop/Datasets/art/art_writing/juxtapoz', filename1)
 
         urls = []
-        with open(filepath1, 'r') as read_path:
-            soup = BeautifulSoup(read_path, 'lxml')
+        with open(filename1, 'r') as read_path:
+            soup = BeautifulSoup(read_path, 'xml')
             linx = soup.select('loc')
             for link in linx:
                 link = link.get_text()

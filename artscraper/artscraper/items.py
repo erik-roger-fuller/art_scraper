@@ -111,3 +111,4 @@ scrapy crawl artforum
 scrapy crawl frieze
 scrapy crawl juxtapoz
 """
+"""https://www.philamuseum.org/collections/results.html?results=18&searchTxt=&searchNameID=&searchClassID=&provenance=0&audio=0&onView=0&searchOrigin=&searchDeptID=1&page=6355&action=post"""
