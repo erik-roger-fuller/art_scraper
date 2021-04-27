@@ -14,13 +14,14 @@ NEWSPIDER_MODULE = 'artscraper.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-USER_AGENT = 'artscraper' # (+http://www.yourdomain.com)'
+USER_AGENT="Mozilla/5.0 (Windows; U; Windows NT 6.1) AppleWebKit/532.49.6 (KHTML, like Gecko) Version/5.0 Safari/532.49.6"
+#USER_AGENT='artscraper' # (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = False
+ROBOTSTXT_OBEY = True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-CONCURRENT_REQUESTS = 16
+CONCURRENT_REQUESTS = 8
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
@@ -76,7 +77,7 @@ AUTOTHROTTLE_START_DELAY = .025
 AUTOTHROTTLE_MAX_DELAY = 60
 # The average number of requests Scrapy should be sending in parallel to
 # each remote server
-#AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0
+AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0
 # Enable showing throttling stats for every response received:
 AUTOTHROTTLE_DEBUG = False
 

@@ -30,7 +30,7 @@ class Juxtapoz_Spider(scrapy.Spider):
         print(len(urls))
         badurls =[]
 
-        for url in urls[2722:2733]: #[111102:111115]:
+        for url in urls[17622:17625]: #[111102:111115]:
             try:
                 yield scrapy.Request(url=url, callback=self.parse)
             except ValueError:
@@ -73,8 +73,6 @@ class Juxtapoz_Spider(scrapy.Spider):
 
         yield l.load_item()
 
-
-
 """
 top = response.xpath('//div[@class="article-header-author-info"]/text()').getall()
         try:
@@ -86,4 +84,4 @@ top = response.xpath('//div[@class="article-header-author-info"]/text()').getall
             l.add_value('pubtime', pubtime)
         except IndexError:
             pass
-            """
+"""
