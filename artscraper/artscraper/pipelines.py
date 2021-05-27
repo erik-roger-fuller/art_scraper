@@ -65,6 +65,7 @@ class Article_Pipeline:
             f = open(filepath, 'wb' ) #open statement
             self.files.append(f) #adds file to files bin
             exporter = JsonItemExporter(f)
+            exporter.export_empty_fields=True
             exporter.start_exporting()
             self.title_to_exporter[title] = exporter
         return self.title_to_exporter[title]

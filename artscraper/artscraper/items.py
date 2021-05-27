@@ -5,6 +5,7 @@
 
 import scrapy
 from scrapy.item import Item, Field
+from dataclasses import dataclass
 from scrapy.loader import ItemLoader
 from itemloaders.processors import TakeFirst, MapCompose, Join, Compose
 from w3lib.html import remove_tags
@@ -29,6 +30,8 @@ def para_clean(para):
     para = para.replace("	", " ").replace("  ", " ").replace("  ", " ")
     para = para.replace("Follow on Facebook:", '').replace("\n", ' ')
     para = para.replace("\r", " ").replace("\t", "")
+    para = re.sub(" © 20[0-9][0-9] e-flux and the author", "", para) #eflux
+    para = re.sub('[ ]+', ' ', para)
     para = para.strip()
     return para
 
