@@ -99,7 +99,7 @@ class Nytimes_Dir_Item(scrapy.Item):
     captions = Field(input_processor=Compose(elim_dupes), output_processor=MapCompose(tags_and_unicode))
     images = Field()
     author = Field(input_processor=Join(), output_processor=TakeFirst())
-    pubtime = Field(output_processor=TakeFirst())
+    pubtime = Field(input_processor=MapCompose(iso_time_to_df))
     tag = Field()
     url = Field()
     source = Field(output_processor=TakeFirst())

@@ -55,7 +55,6 @@ class NytimesSpider(scrapy.Spider):
         item = Nytimes_Dir_Item
         l = ItemLoader(item=Nytimes_Dir_Item(), response=response)
 
-
         l.add_xpath('title', '//meta[@property="og:title"]/@content')
 
         l.add_xpath('para', '//section[@name="articleBody"]/*/*/p/text()|'
