@@ -18,7 +18,7 @@ USER_AGENT="Mozilla/5.0 (Windows; U; Windows NT 6.1) AppleWebKit/532.49.6 (KHTML
 #USER_AGENT='artscraper' # (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+#ROBOTSTXT_OBEY = True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 CONCURRENT_REQUESTS = 8

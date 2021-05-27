@@ -1,4 +1,5 @@
 import scrapy
+import artscraper
 import csv
 #
 from artscraper.items import Artnet_Frontpage_Item

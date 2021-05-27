@@ -6,10 +6,10 @@ from itemadapter import ItemAdapter
 #
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-
-
 # useful for handling different item types with a single interface
 import os
+import re
+
 
 class Article_Pipeline:
     def open_spider(self, spider):
@@ -46,13 +46,20 @@ class Article_Pipeline:
         source = str(source)
 
         if title not in self.title_to_exporter:
-            filename = str(pubtime + "_" + title + '_' + source )
-            filename = filename_clean(filename)
-            filename_final = str(filename + '.json')
-            filepath = os.path.join(os.path.expanduser('~'),
-                                    'Desktop/scrapy/articles_dump', filename)
+            if len(title)<55:
+                filename = f"{pubtime[:10]}_{title}_{source}"
+            else:
+                filename = f"{pubtime[:10]}_{title[:55]}_{source}"
 
-            print("Saved:   " + filename)
+            filename = filename_clean(filename)
+            filename_final = f"{filename}.json"
+            #linux
+            #filepath = os.path.join(os.path.expanduser('~'),'Desktop/scrapy/articles_dump', filename)
+
+            #win
+            filepath = os.path.join(os.path.expanduser('~'), 'PycharmProjects/art_scraper/artscraper/articles_dump', filename_final)
+
+            print("Saved:   " + filename_final)
             self.close_exporters() #shutsdowns old
             self.close_files() #ditto
             f = open(filepath, 'wb' ) #open statement
@@ -69,6 +76,13 @@ class Article_Pipeline:
 
 
 def filename_clean(filename):
+    filename = filename.strip()
+    filename = re.sub('[^0-9a-zA-Z ]+', ' ', filename)
+    #filename = filename.replace("  ", " ").replace(" ", "_")
+    filename = re.sub('[ _]+', '_', filename)
+    #filename = re.sub('_+', '_', filename)
+    return filename
+"""
     newname = filename.replace("-", "_")
     newname = newname.replace(":", "_")
     newname = newname.replace(";", "")
@@ -85,6 +99,7 @@ def filename_clean(filename):
     newname = newname.replace('>', '')
     newname = newname.replace('*', '')
     newname = newname.replace('?', '')
+    newname = newname.replace("+", "_")
 
     #things that look like bananas
     newname = newname.replace("(", "")
@@ -93,17 +108,22 @@ def filename_clean(filename):
     newname = newname.replace("]", "")
     newname = newname.replace("{", "")
     newname = newname.replace("}", "")
+    newname = newname.replace("/", "").replace("\\", "").replace("|", "")
 
     #things that look like whiskers
     newname = newname.replace("'", "")
     newname = newname.replace('"', "")
+    newname = newname.replace("’", "")
     newname = newname.replace(".", "_")
     newname = newname.replace(",", "_")
-    newfilename = newname.replace("+", "_")
-    return newfilename
+
+    newname = newname.replace("`", "").replace("'", "").replace('"', "")
+    newname = newname.replace("__", "_")
+    #newname = re.sub(r'[T][\d][\d][_][\d][\d][_][\d][\d][_][\d][\d][_][\d][\d][_]', '_', newname)
+    return newname
 
 
-"""
+
 #other components of reconfiguarble pipelines
 
 
@@ -122,7 +142,7 @@ def filename_clean(filename):
         self.exporter.finish_exporting()
         self.file.close()
 
-
+"""
 
 class Artnet_Headline_Pipeline:
     def process_item(self, item, spider):
@@ -131,11 +151,11 @@ class Artnet_Headline_Pipeline:
         return item
 
     def __init__(self):
-        self.file = open("artnetfrontpagetoday.jsonl", 'wb')
+        self.file = open("metadata.jsonl", 'wb')
         self.exporter = JsonLinesItemExporter(self.file)
         self.exporter.start_exporting()
 
     def close_spider(self, spider):
         self.exporter.finish_exporting()
         self.file.close()
-"""
+
