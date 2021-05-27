@@ -16,8 +16,8 @@ base_url = "https://www.nytimes.com/"
 
 dates = []
 
-enddate = datetime.date.today()
-startdate = datetime.date(2000, 1, 1)
+enddate = datetime.date(2021, 5, 26)#datetime.date.today()
+startdate = datetime.date(2021, 3, 16)
 diff = enddate - startdate
 for i in range(diff.days +1):
     day = startdate + timedelta(days=i)
@@ -42,12 +42,12 @@ def append_dict_as_row(file_name, dict_of_elem, field_names):
         dict_writer.writerow(dict_of_elem)
         print(f"Saved line : \n {dict_of_elem} \n at {file_name}")
 
-filename1 = f"Nytimes_arts_freq_of_arts_2000_2021.csv"
-filename2 = f"Nytimes_arts_final_arts_links_2000_2021.csv"
+#filename1 = f"Nytimes_arts_freq_of_arts_2000_2021.csv"
+#filename2 = f"Nytimes_arts_final_arts_links_2000_2021.csv"
+filename2 = "Nytimes_arts_links_2021_to_5_26.csv"
+#filepath1 = os.path.join(os.path.expanduser('~'), 'Desktop/Datasets/art', filename1)
 
-filepath1 = os.path.join(os.path.expanduser('~'), 'Desktop/Datasets/art', filename1)
-
-filepath2 = os.path.join(os.path.expanduser('~'), 'Desktop/Datasets/art', filename2)
+#filepath2 = os.path.join(os.path.expanduser('~'), 'Desktop/Datasets/art', filename2)
 
 """retrieval loop"""
 for i, sitemap_url in enumerate(sitemap_urls):
@@ -76,19 +76,15 @@ for i, sitemap_url in enumerate(sitemap_urls):
             not_arts += 1
 
 
-    append_dict_as_row(file_name=filepath1, dict_of_elem={"day": day2 , "yes_arts" : arts , "no_arts" : not_arts} ,
-                       field_names=["day","yes_arts","no_arts",])
+    #append_dict_as_row(file_name=filepath1, dict_of_elem={"day": day2 , "yes_arts" : arts , "no_arts" : not_arts} ,
+    #                   field_names=["day","yes_arts","no_arts",])
 
 
-    append_dict_as_row(file_name=filepath2, dict_of_elem={"day": day2 , "links" : final_urls } ,
+    append_dict_as_row(file_name=filename2, dict_of_elem={"day": day2 , "links" : final_urls } ,
                        field_names=["day","links"])
 
 
 print("finished!")
-
-
-
-
 
 """
         elif link[34:41] == "/books/":

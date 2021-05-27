@@ -10,8 +10,9 @@ class NytimesSpider(scrapy.Spider):
     #start_urls = ['http://https://www.nytimes.com/sitemap//']
 
     def start_requests(self):
-        filename = f"Nytimes_arts_final_arts_links_2000_2021.csv"
-        filepath = os.path.join(os.path.expanduser('~'), 'Desktop/Datasets/art', filename)
+        #filename = f"Nytimes_arts_final_arts_links_2000_2021.csv"
+        filepath = "Nytimes_arts_links_2021_to_5_26.csv"
+        #os.path.join(os.path.expanduser('~'), 'Desktop/Datasets/art', filename)
 
         urls = []
 
