@@ -65,7 +65,7 @@ class Artnet_Article_Item(scrapy.Item):
     pubtime = Field(input_processor=MapCompose(iso_time_to_df), output_processor=TakeFirst())
     tag = Field(input_processor=Join(), output_processor=TakeFirst())
     url = Field()
-    source = Field()
+    source = Field(output_processor=TakeFirst())
 
 
 """hyperallergic"""
