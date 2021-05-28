@@ -46,11 +46,13 @@ class Article_Pipeline:
         source = adapter.get('source')
         source = str(source)
 
+        url = adapter.get("url")
+        url = str(url)
+
         if title not in self.title_to_exporter:
             if source == "artagenda":
-                url = adapter.get("url")
-                url = str(url)
-                url = str.split("/")
+
+                url = url.split("/")
                 #urlname = url[-1]_{url[-2]}
                 filename = f"{pubtime_m}_{url[-1]}_{source}"
             else:
