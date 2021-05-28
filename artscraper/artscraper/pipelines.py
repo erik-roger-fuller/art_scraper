@@ -62,12 +62,12 @@ class Article_Pipeline:
                     filename = f"{pubtime_m}_{title[:55]}_{source}"
 
             filename = filename_clean(filename)
-            filename_final = f"{filename}.json"
+            filename = f"{filename}.json"
             #linux
             #filepath = os.path.join(os.path.expanduser('~'),'Desktop/scrapy/articles_dump', filename)
 
             #win
-            filepath = os.path.join(os.path.expanduser('~'), 'PycharmProjects/art_scraper/artscraper/articles_dump', filename_final)
+            filepath = os.path.join(os.path.expanduser('~'), 'PycharmProjects/art_scraper/artscraper/articles_dump', filename )
 
             print("Saved:   " + filename_final)
             self.close_exporters() #shutsdowns old
