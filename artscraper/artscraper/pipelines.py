@@ -47,10 +47,17 @@ class Article_Pipeline:
         source = str(source)
 
         if title not in self.title_to_exporter:
-            if len(title)<55:
-                filename = f"{pubtime_m}_{title}_{source}"
+            if source == "artagenda":
+                url = adapter.get("url")
+                url = str(url)
+                url = str.split("/")
+                urlname = url[-1]
+                filename = f"{pubtime_m}_{urlname}_{source}"
             else:
-                filename = f"{pubtime_m}_{title[:55]}_{source}"
+                if len(title)<55:
+                    filename = f"{pubtime_m}_{title}_{source}"
+                else:
+                    filename = f"{pubtime_m}_{title[:55]}_{source}"
 
             filename = filename_clean(filename)
             filename_final = f"{filename}.json"
