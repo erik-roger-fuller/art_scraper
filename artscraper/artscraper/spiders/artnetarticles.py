@@ -41,7 +41,7 @@ class ArtnetarticlesSpider(scrapy.Spider):
 
         bodyl = l.nested_xpath('/html[1]/body[1]/section[1]/div[1]/div[2]/div[1]/article[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]')
         
-        bodyl.add_css('para', 'p:not([class*="wp-caption-text"])::text, em::text, strong::text, span::text, p a::text')
+        bodyl.add_css('para', 'p:not([class="wp-caption-text"])::text, em::text, strong::text, span::text, p a::text')
         bodyl.add_css('captions' , 'div[class="wp-caption aligncenter"] p::text')
         bodyl.add_css('images' , 'div[class="wp-caption aligncenter"] img::attr(src)' )
         

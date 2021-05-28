@@ -47,9 +47,21 @@ def frieze_time_to_df(line):
     pubtime_i = line.strip()
     pubtime_i = pubtime_i.title()
     pubtime = datetime.strptime(pubtime_i, "%d %b %y")
-    pubtime = datetime.strftime(pubtime, "%Y-%m-%d")
+    #pubtime = datetime.strftime(pubtime, "%Y-%m-%d")
     return pubtime
     # frieze : "pubtime": "31 OCT 18"
+
+def word_time_to_df(line):
+    #line = str(line)
+    line = line.replace("	", "").replace("\n", ' ')
+    line = line.replace("\r", " ").replace("\t", "").replace(",", "")
+    pubtime_i = line.strip()
+    pubtime_i = pubtime_i.title()
+    #print(pubtime_i)
+    pubtime = datetime.strptime(pubtime_i, "%B %d %Y")
+    #pubtime = datetime.strftime(pubtime, "%Y-%m-%d")
+    return pubtime
+    # eflux = January 12, 2016 : "pubtime":
 
 def elim_dupes(x):
   return list(dict.fromkeys(x))
@@ -65,7 +77,7 @@ class Artnet_Article_Item(scrapy.Item):
     captions = Field(input_processor=MapCompose(tags_and_unicode))
     images = Field()
     author = Field(input_processor=Join(), output_processor=TakeFirst())
-    pubtime = Field(input_processor=MapCompose(iso_time_to_df), output_processor=TakeFirst())
+    pubtime = Field(input_processor=Join(), output_processor=(iso_time_to_df))
     tag = Field(input_processor=Join(), output_processor=TakeFirst())
     url = Field()
     source = Field(output_processor=TakeFirst())
@@ -92,6 +104,18 @@ class Artforum_Dir_Item(scrapy.Item):
     images = Field()
     author = Field(input_processor=Join(), output_processor=TakeFirst())
     pubtime = Field( output_processor=TakeFirst())
+    tag = Field()
+    url = Field()
+    source = Field(output_processor=TakeFirst())
+
+
+class Artag_and_eflux_Item(scrapy.Item):
+    title = Field(input_processor=Join(), output_processor=MapCompose(tags_and_unicode))
+    para = Field(input_processor=Join(), output_processor=MapCompose(para_clean))
+    captions = Field(input_processor=MapCompose(tags_and_unicode))
+    images = Field()
+    author = Field(input_processor=Join(), output_processor=TakeFirst())
+    pubtime = Field(input_processor=MapCompose(word_time_to_df), output_processor=TakeFirst())
     tag = Field()
     url = Field()
     source = Field(output_processor=TakeFirst())

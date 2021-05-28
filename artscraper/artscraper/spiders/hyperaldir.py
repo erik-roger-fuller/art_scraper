@@ -8,7 +8,6 @@ import json
 
 class HyperaldirSpider(SitemapSpider):
     name = 'hyperaldir'
-    #allowed_domains = ['https://hyperallergic.com/wp-sitemap-posts-post-1.xml']
     sitemap_urls = ['https://hyperallergic.com/wp-sitemap-posts-post-15.xml/']
 
 
@@ -66,7 +65,6 @@ class HyperaldirSpider(SitemapSpider):
 
 
 """
-,
                     'https://hyperallergic.com/wp-sitemap-posts-post-2.xml/',
                     'https://hyperallergic.com/wp-sitemap-posts-post-3.xml/',
                     'https://hyperallergic.com/wp-sitemap-posts-post-4.xml/',
