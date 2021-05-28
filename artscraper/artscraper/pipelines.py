@@ -51,8 +51,8 @@ class Article_Pipeline:
                 url = adapter.get("url")
                 url = str(url)
                 url = str.split("/")
-                #urlname = url[-1]
-                filename = f"{pubtime_m}_{url[-2]}_{url[-1]}_{source}"
+                #urlname = url[-1]_{url[-2]}
+                filename = f"{pubtime_m}_{url[-1]}_{source}"
             else:
                 if len(title)<55:
                     filename = f"{pubtime_m}_{title}_{source}"
