@@ -8,7 +8,7 @@ from scrapy.spiders import SitemapSpider
 class JustArtnewsSpider(SitemapSpider):
     name = 'just_artnews'
     #allowed_domains = ['https://www.artnews.com/sitemap_index.xml']
-    sitemap_urls = ['http://https://www.artnews.com/post-sitemap202106']
+    sitemap_urls = ['https://www.artnews.com/post-sitemap202106.xml']
 
     def parse(self, response):
         item = Hyperallergic_Dir_Item

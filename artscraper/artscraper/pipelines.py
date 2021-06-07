@@ -69,7 +69,7 @@ class Article_Pipeline:
             #win
             filepath = os.path.join(os.path.expanduser('~'), 'PycharmProjects/art_scraper/artscraper/articles_dump', filename )
 
-            print("Saved:   " + filename_final)
+            print("Saved:   " + filename)
             self.close_exporters() #shutsdowns old
             self.close_files() #ditto
             f = open(filepath, 'wb' ) #open statement
