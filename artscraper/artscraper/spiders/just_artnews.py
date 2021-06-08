@@ -11,7 +11,9 @@ class JustArtnewsSpider(SitemapSpider):
     sitemap_urls = ['https://www.artnews.com/sitemap_index.xml']
     #= ['https://www.artnews.com/post-sitemap202106.xml']
 
-    sitemap_follow = ['/post-sitemap2018']
+    sitemap_follow = ['/post-sitemap2017','/post-sitemap2016','/post-sitemap2015','/post-sitemap2014',
+                      '/post-sitemap2013','/post-sitemap2012','/post-sitemap2011','/post-sitemap2010',
+                      '/post-sitemap200', '/post-sitemap19']
 
     #def sitemap_filter(self, entries):
     #   for entry in entries:
