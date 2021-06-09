@@ -21,6 +21,7 @@ def tags_and_unicode(xxx):
     zzz = aaa.strip()
     aaa = zzz.replace( " | Artnet News", "").replace("© FRIEZE 2020 |", "")
     aaa = aaa.replace("© FRIEZE 2021 |", "")
+    aaa = re.sub('[ ]+', ' ', aaa)
     return aaa
 
 def para_clean(para):
@@ -52,13 +53,19 @@ def frieze_time_to_df(line):
     # frieze : "pubtime": "31 OCT 18"
 
 def word_time_to_df(line):
-    #line = str(line)
+    print(type(line))
+    if type(line) == 'list':
+        line = " ".join(line)
+    line = str(line)
     line = line.replace("	", "").replace("\n", ' ')
     line = line.replace("\r", " ").replace("\t", "").replace(",", "")
     pubtime_i = line.strip()
     pubtime_i = pubtime_i.title()
     #print(pubtime_i)
-    pubtime = datetime.strptime(pubtime_i, "%B %d %Y")
+    try:
+        pubtime = datetime.strptime(pubtime_i, "%B %d %Y")
+    except ValueError:
+        pubtime = datetime.strptime(pubtime_i, "%b %d %Y")
     #pubtime = datetime.strftime(pubtime, "%Y-%m-%d")
     return pubtime
     # eflux = January 12, 2016 : "pubtime":
@@ -116,7 +123,7 @@ class Artag_and_eflux_Item(scrapy.Item):
     images = Field()
     author = Field(input_processor=Join(), output_processor=TakeFirst())
     pubtime = Field(input_processor=MapCompose(word_time_to_df), output_processor=TakeFirst())
-    tag = Field()
+    tag = Field(input_processor=MapCompose(tags_and_unicode))
     url = Field()
     source = Field(output_processor=TakeFirst())
 

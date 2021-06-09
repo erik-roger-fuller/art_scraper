@@ -35,7 +35,7 @@ class JustArtnewsSpider(SitemapSpider):
                             '|//span[@class="s1"]/descendant-or-self::text()|//span[@class="s2"]/descendant-or-self::text()'
                             '|//div[contains(@class,"a-content")]/p/descendant-or-self::text()')
 
-        captions = ("captions", '//div[@class="post-content-image // "]/figure/div/div/img/@alt')
+        l.add_xpath("captions", '//div[@class="post-content-image // "]/figure/div/div/img/@alt')
         l.add_xpath("images", '//div[@class="post-content-image // "]/figure/div/div/img/@data-lazy-src')
 
         l.add_xpath("author", '//meta[@name="author"]/@content')
